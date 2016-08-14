@@ -30,7 +30,6 @@
  */
 import sbt.Keys._
 import sbt._
-import com.twitter.sbt._
 
 lazy val Versions = new {
   val phantom = "1.28.8"
@@ -89,7 +88,6 @@ val sharedSettings: Seq[Def.Setting[_]] = Defaults.coreDefaultSettings ++ Seq(
   ),
   logLevel in ThisBuild := Level.Info,
   libraryDependencies ++= Seq(
-    "ch.qos.logback" % "logback-classic" % Versions.logback,
     "org.slf4j" % "log4j-over-slf4j" % Versions.slf4j
   ),
   fork in Test := true,
@@ -103,9 +101,7 @@ val sharedSettings: Seq[Def.Setting[_]] = Defaults.coreDefaultSettings ++ Seq(
   //testOptions in PerformanceTest := Seq(Tests.Filter(x => performanceFilter(x))),
   //fork in PerformanceTest := false,
   parallelExecution in ThisBuild := false
-) ++ VersionManagement.newSettings ++
-  GitProject.gitSettings
-}
+)
 
 lazy val examples = (project in file("."))
   .settings(sharedSettings: _*)
